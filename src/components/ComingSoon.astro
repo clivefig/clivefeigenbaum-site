@@ -31,6 +31,12 @@ const todo = [
         <a href="mailto:clive@clivefeigenbaum.com" class="btn-accent">Say Hello</a>
         <a href="#interests" class="btn-outline-white">Explore for Now</a>
       </div>
+      <button class="email-copy" id="copyEmail" aria-label="Copy email address">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        <span id="copyLabel">clive@clivefeigenbaum.com</span>
+      </button>
     </div>
 
     <!-- Right: progress card -->
@@ -196,6 +202,24 @@ const todo = [
   .done-icon  { background: var(--accent); color: var(--navy); }
   .todo-icon  { border: 2px solid rgba(255, 255, 255, 0.2); }
 
+  /* Email copy button */
+  .email-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+  }
+  .email-copy:hover { color: rgba(255, 255, 255, 0.85); }
+  .email-copy svg   { flex-shrink: 0; }
+
   @media (max-width: 768px) {
     .coming-soon-wrap {
       padding: 64px 20px;
@@ -217,3 +241,21 @@ const todo = [
     }
   }
 </style>
+
+<script>
+  const btn   = document.getElementById('copyEmail')
+  const label = document.getElementById('copyLabel')
+
+  btn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('clive@clivefeigenbaum.com')
+      if (label) {
+        label.textContent = 'Copied!'
+        setTimeout(() => { label.textContent = 'clive@clivefeigenbaum.com' }, 2000)
+      }
+    } catch {
+      // Fallback: select text manually
+      window.prompt('Copy this email:', 'clive@clivefeigenbaum.com')
+    }
+  })
+</script>
