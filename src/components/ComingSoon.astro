@@ -28,10 +28,11 @@ const todo = [
         and probably a whisky recommendation or two. Thanks for stopping by early.
       </p>
       <div class="cs-actions">
-        <a href="mailto:clive@clivefeigenbaum.com" class="btn-accent">Say Hello</a>
+        <a href="mailto:clive@clivefeigenbaum.com" class="btn-accent" id="sayHello">Say Hello</a>
         <a href="#interests" class="btn-outline-white">Explore for Now</a>
       </div>
-      <button class="email-copy" id="copyEmail" aria-label="Copy email address">
+      <!-- Hidden by default; revealed only if mailto didn't open a mail client -->
+      <button class="email-copy" id="copyEmail" aria-label="Copy email address" hidden>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
         </svg>
@@ -202,7 +203,7 @@ const todo = [
   .done-icon  { background: var(--accent); color: var(--navy); }
   .todo-icon  { border: 2px solid rgba(255, 255, 255, 0.2); }
 
-  /* Email copy button */
+  /* Email copy button — hidden until mailto fails to open a client */
   .email-copy {
     display: inline-flex;
     align-items: center;
@@ -216,9 +217,15 @@ const todo = [
     cursor: pointer;
     padding: 0;
     transition: color 0.2s ease;
+    animation: fade-in 0.4s ease forwards;
   }
   .email-copy:hover { color: rgba(255, 255, 255, 0.85); }
   .email-copy svg   { flex-shrink: 0; }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
   @media (max-width: 768px) {
     .coming-soon-wrap {
@@ -243,10 +250,28 @@ const todo = [
 </style>
 
 <script>
-  const btn   = document.getElementById('copyEmail')
-  const label = document.getElementById('copyLabel')
+  const sayHello = document.getElementById('sayHello')
+  const copyBtn  = document.getElementById('copyEmail')
+  const label    = document.getElementById('copyLabel')
 
-  btn?.addEventListener('click', async () => {
+  sayHello?.addEventListener('click', () => {
+    // Give the browser ~600ms to hand off to a mail client.
+    // If the window still has focus after that, no client opened → show fallback.
+    let mailOpened = false
+
+    const onBlur = () => { mailOpened = true }
+    window.addEventListener('blur', onBlur, { once: true })
+
+    setTimeout(() => {
+      window.removeEventListener('blur', onBlur)
+      if (!mailOpened && copyBtn) {
+        copyBtn.hidden = false
+      }
+    }, 600)
+  })
+
+  // Copy to clipboard when the fallback button is clicked
+  copyBtn?.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText('clive@clivefeigenbaum.com')
       if (label) {
@@ -254,7 +279,6 @@ const todo = [
         setTimeout(() => { label.textContent = 'clive@clivefeigenbaum.com' }, 2000)
       }
     } catch {
-      // Fallback: select text manually
       window.prompt('Copy this email:', 'clive@clivefeigenbaum.com')
     }
   })
