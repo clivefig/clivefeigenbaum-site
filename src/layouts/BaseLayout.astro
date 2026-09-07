@@ -82,7 +82,11 @@ const {
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%; /* prevent iOS font scaling */
   }
+
+  /* Ensure nothing bleeds horizontally */
+  html { overflow-x: hidden; }
 
   /* ─── Noise overlay ──────────────────────────────────────────────────────── */
   body::before {

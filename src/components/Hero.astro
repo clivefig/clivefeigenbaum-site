@@ -30,8 +30,7 @@
   </h1>
 
   <p class="hero-tagline reveal">
-    <strong>Customer-focused specialist.</strong> Wannabe photographer. Whisky sipper.<br />
-    World explorer. Builder of things. Full-time curious human.
+    <strong>I am a Customer focused specialist.</strong> Working in the world of SAAS applications and looking to make a difference. A wannabe <strong>photographer</strong> - much to my wife's dismay.<br> A <strong>whisky</strong> sipper who will happily have a wee dram anywhere in the world.<br />A builder of things who is also a full-time curious human.
   </p>
 
   <div class="cta-group reveal">
@@ -168,5 +167,53 @@
   @keyframes bounce {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ─── Mobile ────────────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 100px 20px 72px;
+      min-height: 100svh; /* use svh to account for mobile browser chrome */
+    }
+
+    /* Scale rings down so they don't bleed off-screen */
+    .hero-rings {
+      width: 320px;
+      height: 320px;
+    }
+
+    /* Shrink photo slightly on small screens */
+    .photo-wrap img {
+      width: 130px;
+      height: 130px;
+    }
+
+    /* Keep badge inside the viewport */
+    .status-badge {
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      right: -8px;
+    }
+
+    /* Buttons stack nicely on narrow screens */
+    .cta-group {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .cta-group a {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+    }
+
+    /* Hide scroll hint on mobile — not needed with short viewport */
+    .scroll-hint {
+      display: none;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero-rings { display: none; } /* hide on very small phones to avoid any overflow */
   }
 </style>

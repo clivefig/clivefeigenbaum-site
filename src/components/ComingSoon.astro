@@ -197,9 +197,23 @@ const todo = [
   .todo-icon  { border: 2px solid rgba(255, 255, 255, 0.2); }
 
   @media (max-width: 768px) {
+    .coming-soon-wrap {
+      padding: 64px 20px;
+    }
     .coming-soon-inner {
       grid-template-columns: 1fr;
+      gap: 32px;
     }
-    .progress-card { min-width: unset; width: 100%; }
+    .progress-card {
+      min-width: unset;
+      width: 100%;
+      padding: 24px 20px;
+    }
+    .cs-actions {
+      flex-direction: column;
+    }
+    .cs-actions a {
+      text-align: center;
+    }
   }
 </style>

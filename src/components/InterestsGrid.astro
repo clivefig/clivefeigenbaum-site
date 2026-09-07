@@ -7,7 +7,7 @@ const interests = [
     tag:   'Passion 01',
     name:  'Technology',
     color: '#2563EB',
-    desc:  'Fascinated by how technology reshapes the world — from AI to the devices we carry. Always watching what\'s next on the horizon.',
+    desc:  'I am fascinated by how technology reshapes the world — from AI to the devices we carry. I am always watching what\'s next on the horizon and learning new things to use in my career and personal life.',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
              <rect x="2" y="3" width="20" height="14" rx="2"/>
              <path d="M8 21h8M12 17v4"/>
@@ -17,7 +17,7 @@ const interests = [
     tag:   'Passion 02',
     name:  'Development',
     color: '#16A34A',
-    desc:  'There\'s magic in turning ideas into products. Building software is equal parts craft, logic, and stubbornness — I love every bit of it.',
+    desc:  'There\'s magic in turning ideas into products. Building software is equal parts craft, logic, and stubbornness and I love every bit of it. In the current climate, vibe coding has changed that way I think, work and build!',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
              <polyline points="16 18 22 12 16 6"/>
              <polyline points="8 6 2 12 8 18"/>
@@ -27,7 +27,7 @@ const interests = [
     tag:   'Passion 03',
     name:  'Photography',
     color: '#DB2777',
-    desc:  'Seeing the world through a lens changes how you look at everything. Chasing light, moments, and the stories hidden in plain sight.',
+    desc:  'A picture is worth a thousand words and seeing the world through a lens changes how you look at everything. Chasing the light, a moment, and stories that arehidden in plain sight is a great way to refocus and look at the world from a different perspective.',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
              <circle cx="12" cy="13" r="4"/>
@@ -37,7 +37,7 @@ const interests = [
     tag:   'Passion 04',
     name:  'Travel',
     color: '#EA580C',
-    desc:  'New places, new people, new perspective. The world is endlessly surprising and travel is the best way to remind yourself of that.',
+    desc:  '“I haven\'t been everywhere, but it\'s on my list.” — Susan Sontag. I love to travel and explore new places and cultures. Delving into other cultures and history is a amazing anchor point to refocus and appreciate the world we live in.',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
              <circle cx="12" cy="12" r="10"/>
              <line x1="2" y1="12" x2="22" y2="12"/>
@@ -48,7 +48,7 @@ const interests = [
     tag:   'Passion 05',
     name:  'Whisky',
     color: '#9333EA',
-    desc:  'A good dram is a conversation in a glass. Smoky, peaty, sherried — the world of whisky is a rabbit hole worth every sip of exploration.',
+    desc:  '“Always carry a flagon of whiskey in case of snakebite and furthermore always carry a small snake.” - W.C. Fields. A quiet dram with friends or family is a great way to connect and enjoy the moment.',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
              <path d="M8 2h8l1 7H7L8 2z"/>
              <path d="M7 9c0 7 3 11 5 13 2-2 5-6 5-13"/>
@@ -59,7 +59,7 @@ const interests = [
     tag:   'Passion 06',
     name:  'Family',
     color: '#DC2626',
-    desc:  'At the end of the day, it\'s all about the people you come home to. Family is my anchor, my motivation, and my greatest adventure.',
+    desc:  'At the end of the day, it\'s all about the people you come home to. Family is my anchor, my motivation, and my greatest adventure. I love taking the time making memories and sharing my passions with my family.',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
            </svg>`,
@@ -98,5 +98,21 @@ const interests = [
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
     margin-top: 56px;
+    align-items: stretch;
+  }
+
+  /* Make the reveal wrapper fill the full grid cell height */
+  .interests-grid > div {
+    display: flex;
+  }
+
+  /* ─── Mobile ────────────────────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    /* Force single column — minmax(280px) can still try to fit 2 on some phones */
+    .interests-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 36px;
+    }
   }
 </style>
