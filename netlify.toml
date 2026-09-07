@@ -1,0 +1,24 @@
+# Netlify configuration for clivefeigenbaum.com
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  command         = "npm run build"
+  publish         = "dist"
+
+[build.environment]
+  NODE_VERSION    = "22"
+
+# Redirect www → apex domain
+[[redirects]]
+  from   = "https://www.clivefeigenbaum.com/*"
+  to     = "https://clivefeigenbaum.com/:splat"
+  status = 301
+  force  = true
+
+# Pretty URLs — Astro handles this but belt-and-braces
+[[headers]]
+  for   = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
