@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clive Feigenbaum — Customer Specialist. Wannabe Photographer. Curious Human.</title>
+  <meta name="description" content="Customer-focused specialist. Wannabe photographer. Whisky sipper. World explorer. Builder of things. Something great is coming to clivefeigenbaum.com." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #F9F7F4;
+      --surface:     #FFFFFF;
+      --text:        #1A1A2E;
+      --muted:       #6B7280;
+      --border:      #E8E3DB;
+      --accent:      #D4961F;   /* whisky gold */
+      --accent-lt:   #F5E6C0;
+      --navy:        #1E3A5F;
+      --radius:      20px;
+      --radius-sm:   12px;
+      --max-w:       1100px;
+      --transition:  0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── Noise texture overlay ────────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ───────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(249, 247, 244, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .nav-pill .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* ─── HERO ──────────────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+
+    /* Decorative rings behind photo */
+    .hero-rings {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      pointer-events: none;
+    }
+
+    .hero-rings circle {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 1;
+    }
+
+    .hero-rings .ring-accent {
+      stroke: var(--accent-lt);
+      stroke-dasharray: 6 10;
+      animation: spin-slow 30s linear infinite;
+      transform-origin: 250px 250px;
+    }
+
+    @keyframes spin-slow {
+      to { transform: rotate(360deg); }
+    }
+
+    .photo-wrap {
+      position: relative;
+      margin-bottom: 32px;
+      display: inline-block;
+    }
+
+    .photo-wrap img {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 4px solid var(--surface);
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+      display: block;
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: 4px; right: -4px;
+      background: var(--accent);
+      color: var(--navy);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 3px solid var(--bg);
+      white-space: nowrap;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-tagline strong { color: var(--text); }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+      letter-spacing: 0.2px;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      border: 2px solid var(--border);
+      color: var(--text);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: bounce 2.5s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .scroll-hint svg { opacity: 0.5; }
+
+    /* ─── SECTION WRAPPER ───────────────────────────────────────────────────── */
+    .section {
+      position: relative;
+      z-index: 1;
+      padding: 96px 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+    }
+
+    /* ─── INTERESTS GRID ────────────────────────────────────────────────────── */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 56px;
+    }
+
+    .interest-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      cursor: default;
+      transition: transform var(--transition), border-color var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .interest-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--card-color, var(--accent));
+      border-radius: 3px 3px 0 0;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--card-color, var(--accent));
+    }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      background: color-mix(in srgb, var(--card-color, var(--accent)) 12%, transparent);
+    }
+
+    .card-icon svg {
+      width: 26px; height: 26px;
+      color: var(--card-color, var(--accent));
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--card-color, var(--accent));
+      margin-bottom: 10px;
+    }
+
+    .card-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── DIVIDER ───────────────────────────────────────────────────────────── */
+    .full-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── COMING SOON BANNER ────────────────────────────────────────────────── */
+    .coming-soon-wrap {
+      position: relative;
+      z-index: 1;
+      background: var(--navy);
+      color: #fff;
+      padding: 96px 24px;
+      overflow: hidden;
+    }
+
+    .coming-soon-wrap::before {
+      content: 'SOON';
+      position: absolute;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20vw;
+      color: rgba(255,255,255,0.03);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -4px;
+    }
+
+    .coming-soon-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .cs-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .cs-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .cs-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .cs-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--navy);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .btn-accent:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .btn-outline-white {
+      border: 2px solid rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .btn-outline-white:hover {
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Progress bar */
+    .progress-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      min-width: 280px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .progress-label span:first-child {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+
+    .progress-pct {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+      width: 35%;
+      animation: fill-bar 2s ease forwards;
+    }
+
+    @keyframes fill-bar {
+      from { width: 0%; }
+      to   { width: 35%; }
+    }
+
+    .checklist { list-style: none; }
+
+    .checklist li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .checklist li.done { color: rgba(255,255,255,0.9); }
+
+    .check-icon {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .check-icon.done-icon {
+      background: var(--accent);
+      color: var(--navy);
+    }
+
+    .check-icon.todo-icon {
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: #111827;
+      color: rgba(255,255,255,0.4);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    .footer-links { display: flex; gap: 24px; }
+
+    /* ─── Scroll reveal ─────────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .section { padding: 64px 20px; }
+
+      .coming-soon-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .progress-card {
+        min-width: unset;
+        width: 100%;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Clive<span>.</span></a>
+    <div class="nav-pill">
+      <div class="dot"></div>
+      Coming Soon
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Decorative rings -->
+    <svg class="hero-rings" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="250" cy="250" r="200"/>
+      <circle cx="250" cy="250" r="160"/>
+      <circle class="ring-accent" cx="250" cy="250" r="230" stroke-dasharray="8 14"/>
+    </svg>
+
+    <div class="photo-wrap reveal">
+      <img src="assets/profile.jpg" alt="Clive" />
+      <span class="status-badge">Building something cool</span>
+    </div>
+
+    <p class="hero-eyebrow reveal">Welcome to my corner of the internet</p>
+
+    <h1 class="reveal">
+      Hi, I'm <em>Clive</em>.<br/>
+      Nice to meet you.
+    </h1>
+
+    <p class="hero-tagline reveal">
+      <strong>Customer-focused specialist.</strong> Wannabe photographer. Whisky sipper.<br/>
+      World explorer. Builder of things. Full-time curious human.
+    </p>
+
+    <div class="cta-group reveal">
+      <a href="#interests" class="btn-primary">Explore My World</a>
+      <a href="https://www.linkedin.com/in/clive-feigenbaum-israel/" target="_blank" rel="noopener" class="btn-ghost">LinkedIn</a>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Scroll
+    </div>
+  </section>
+
+  <div class="full-divider"></div>
+
+  <!-- INTERESTS SECTION -->
+  <div id="interests">
+    <div class="section">
+      <div class="reveal">
+        <div class="section-label">The good stuff</div>
+        <h2 class="section-title">What makes<br/>me tick</h2>
+        <p class="section-subtitle">Six passions. One life. Endlessly connected.</p>
+      </div>
+
+      <div class="interests-grid">
+
+        <!-- Technology -->
+        <div class="interest-card reveal" style="--card-color: #2563EB;">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <span class="card-tag">Passion 01</span>
+          <h3 class="card-name">Technology</h3>
+          <p class="card-desc">Fascinated by how technology reshapes the world — from AI to the devices we carry. Always watching what's next on the horizon.</p>
+        </div>
+
+        <!-- Development -->
+        <div class="interest-card reveal" style="--card-color: #16A34A;">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <span class="card-tag">Passion 02</span>
+          <h3 class="card-name">Development</h3>
+          <p class="card-desc">There's magic in turning ideas into products. Building software is equal parts craft, logic, and stubbornness — I love every part of it.</p>
+        </div>
+
+        <!-- Photography -->
+        <div class="interest-card reveal" style="--card-color: #DB2777;">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
+          <span class="card-tag">Passion 03</span>
+          <h3 class="card-name">Photography</h3>
+          <p class="card-desc">Seeing the world through a lens changes how you look at everything. Chasing light, moments, and the stories hidden in plain sight.</p>
+        </div>
+
+        <!-- Travel -->
+        <div class="interest-card reveal" style="--card-color: #EA580C;">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <span class="card-tag">Passion 04</span>
+          <h3 class="card-name">Travel</h3>
+          <p class="card-desc">New places, new people, new perspective. The world is endlessly surprising and travel is the best way to remind yourself of that.</p>
+        </div>
+
+        <!-- Whisky -->
+        <div class="interest-card reveal" style="--card-color: #9333EA;">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 2h8l1 7H7L8 2z"/><path d="M7 9c0 7 3 11 5 13 2-2 5-6 5-13"/>
+              <line x1="9" y1="14" x2="15" y2="14"/>
+            </svg>
+          </div>
+          <span class="card-tag">Passion 05</span>
+          <h3 class="card-name">Whisky</h3>
+          <p class="card-desc">A good dram is a conversation in a glass. Smoky, peaty, sherried — the world of whisky is a rabbit hole worth every sip of exploration.</p>
+        </div>
+
+        <!-- Family -->
+        <div class="interest-card reveal" style="--card-color: #DC2626;">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <span class="card-tag">Passion 06</span>
+          <h3 class="card-name">Family</h3>
+          <p class="card-desc">At the end of the day, it's all about the people you come home to. Family is my anchor, my motivation, and my greatest adventure.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="full-divider"></div>
+
+  <!-- COMING SOON BANNER -->
+  <div class="coming-soon-wrap" id="coming-soon">
+    <div class="coming-soon-inner">
+      <div class="reveal">
+        <p class="cs-eyebrow">Stay tuned</p>
+        <h2 class="cs-title">Something<br/>beautiful is<br/>brewing.</h2>
+        <p class="cs-desc">
+          A full site is in the works — packed with stories, projects, photos, and probably a whisky recommendation or two. Thanks for stopping by early.
+        </p>
+        <div class="cs-actions">
+          <a href="mailto:clive@clivefeigenbaum.com" class="btn-accent">Say Hello</a>
+          <a href="#interests" class="btn-outline-white">Explore for Now</a>
+        </div>
+      </div>
+
+      <div class="progress-card reveal">
+        <div class="progress-label">
+          <span>Site progress</span>
+          <span class="progress-pct">35%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <ul class="checklist">
+          <li class="done">
+            <span class="check-icon done-icon">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Placeholder page live
+          </li>
+          <li class="done">
+            <span class="check-icon done-icon">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Design direction locked
+          </li>
+          <li>
+            <span class="check-icon todo-icon"></span>
+            Portfolio section
+          </li>
+          <li>
+            <span class="check-icon todo-icon"></span>
+            Photo gallery
+          </li>
+          <li>
+            <span class="check-icon todo-icon"></span>
+            Blog &amp; writing
+          </li>
+          <li>
+            <span class="check-icon todo-icon"></span>
+            Whisky journal
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>&copy; 2026 Clive &mdash; All rights reserved.</span>
+    <nav class="footer-links" aria-label="Footer links">
+      <a href="mailto:clive@clivefeigenbaum.com">Email</a>
+      <a href="https://www.linkedin.com/in/clive-feigenbaum-israel/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#top">Back to top</a>
+    </nav>
+  </footer>
+
+  <!-- SCROLL REVEAL SCRIPT -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger cards in the grid
+          const delay = entry.target.closest('.interests-grid') ? i * 60 : 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth nav background
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 20 ? 'var(--border)' : 'transparent';
+    });
+  </script>
+
+</body>
+</html>

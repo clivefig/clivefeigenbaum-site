@@ -1,0 +1,82 @@
+---
+interface Props {
+  tag:         string   // e.g. "Passion 01"
+  name:        string   // e.g. "Technology"
+  description: string
+  color:       string   // CSS colour value e.g. "#2563EB"
+}
+
+const { tag, name, description, color } = Astro.props
+---
+
+<article class="interest-card" style={`--card-color: ${color}`}>
+  <div class="card-icon" aria-hidden="true">
+    <!-- Icon injected via the default slot -->
+    <slot />
+  </div>
+  <span class="card-tag">{tag}</span>
+  <h3 class="card-name">{name}</h3>
+  <p class="card-desc">{description}</p>
+</article>
+
+<style>
+  .interest-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    cursor: default;
+    transition: transform var(--t), border-color var(--t);
+    position: relative;
+    overflow: hidden;
+  }
+  .interest-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-color, var(--accent));
+    border-radius: 3px 3px 0 0;
+  }
+  .interest-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--card-color, var(--accent));
+  }
+
+  .card-icon {
+    width: 52px; height: 52px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    background: color-mix(in srgb, var(--card-color, var(--accent)) 12%, transparent);
+  }
+  /* Target the SVG passed via slot */
+  .card-icon :global(svg) {
+    width: 26px; height: 26px;
+    color: var(--card-color, var(--accent));
+    flex-shrink: 0;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--card-color, var(--accent));
+    margin-bottom: 10px;
+  }
+  .card-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+</style>

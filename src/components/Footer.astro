@@ -1,0 +1,53 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer>
+  <span>&copy; {year} Clive Feigenbaum &mdash; All rights reserved.</span>
+  <nav aria-label="Footer links">
+    <a href="mailto:clive@clivefeigenbaum.com">Email</a>
+    <a
+      href="https://www.linkedin.com/in/clive-feigenbaum-israel/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      LinkedIn
+    </a>
+    <a href="#top">Back to top</a>
+  </nav>
+</footer>
+
+<style>
+  footer {
+    position: relative;
+    z-index: 1;
+    background: #111827;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+  }
+
+  nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    footer {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 28px 20px;
+    }
+  }
+</style>

@@ -1,0 +1,219 @@
+---
+interface Props {
+  title?: string
+  description?: string
+  ogImage?: string
+}
+
+const {
+  title       = 'Clive Feigenbaum — Customer Specialist. Wannabe Photographer.',
+  description = 'Customer-focused specialist. Wannabe photographer. Whisky sipper. World explorer. Builder of things.',
+  ogImage     = '/assets/profile.jpg',
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={ogImage} />
+    <meta property="og:type"        content="website" />
+    <meta name="twitter:card"       content="summary_large_image" />
+
+    <title>{title}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  /* ─── Reset ──────────────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  img  { display: block; max-width: 100%; }
+
+  /* ─── Design tokens ──────────────────────────────────────────────────────── */
+  :root {
+    --bg:          #F9F7F4;
+    --surface:     #FFFFFF;
+    --text:        #1A1A2E;
+    --muted:       #6B7280;
+    --border:      #E8E3DB;
+    --accent:      #D4961F;   /* whisky gold — main brand accent */
+    --accent-lt:   #F5E6C0;
+    --navy:        #1E3A5F;
+    --radius:      20px;
+    --radius-sm:   12px;
+    --max-w:       1100px;
+    --t:           0.3s ease;
+  }
+
+  /* ─── Base ───────────────────────────────────────────────────────────────── */
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── Noise overlay ──────────────────────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── Section wrapper ─────────────────────────────────────────────────────── */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 96px 24px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .full-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── Shared section header ───────────────────────────────────────────────── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 480px;
+  }
+
+  /* ─── Shared buttons ─────────────────────────────────────────────────────── */
+  .btn-primary {
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background var(--t), transform var(--t);
+    letter-spacing: 0.2px;
+  }
+  .btn-primary:hover { background: var(--accent); color: var(--navy); transform: translateY(-2px); }
+
+  .btn-ghost {
+    border: 2px solid var(--border);
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color var(--t), transform var(--t);
+  }
+  .btn-ghost:hover { border-color: var(--navy); transform: translateY(-2px); }
+
+  .btn-accent {
+    background: var(--accent);
+    color: var(--navy);
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity var(--t), transform var(--t);
+  }
+  .btn-accent:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  .btn-outline-white {
+    border: 2px solid rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color var(--t), transform var(--t);
+  }
+  .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+
+  /* ─── Scroll reveal ──────────────────────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── Responsive ─────────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .section { padding: 64px 20px; }
+  }
+</style>
+
+<script>
+  // Scroll reveal — runs once after DOM is ready
+  const reveals = document.querySelectorAll('.reveal')
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const isInGrid = (entry.target as HTMLElement).closest('.interests-grid')
+          const delay   = isInGrid ? i * 60 : 0
+          setTimeout(() => entry.target.classList.add('visible'), delay)
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  )
+  reveals.forEach(el => observer.observe(el))
+</script>

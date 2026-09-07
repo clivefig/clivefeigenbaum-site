@@ -1,0 +1,205 @@
+---
+// Checklist items for the progress card
+const done = [
+  'Placeholder page live',
+  'Design direction locked',
+  'Astro project scaffolded',
+]
+const todo = [
+  'Portfolio section',
+  'Photo gallery',
+  'Blog & writing',
+  'Whisky journal',
+  'Travel log',
+]
+---
+
+<section class="coming-soon-wrap" id="coming-soon">
+  <div class="coming-soon-inner">
+
+    <!-- Left: copy -->
+    <div class="reveal">
+      <p class="cs-eyebrow">Stay tuned</p>
+      <h2 class="cs-title">
+        Something<br />beautiful is<br />brewing.
+      </h2>
+      <p class="cs-desc">
+        A full site is in the works — packed with stories, projects, photos,
+        and probably a whisky recommendation or two. Thanks for stopping by early.
+      </p>
+      <div class="cs-actions">
+        <a href="mailto:clive@clivefeigenbaum.com" class="btn-accent">Say Hello</a>
+        <a href="#interests" class="btn-outline-white">Explore for Now</a>
+      </div>
+    </div>
+
+    <!-- Right: progress card -->
+    <div class="progress-card reveal">
+      <div class="progress-label">
+        <span>Site progress</span>
+        <span class="progress-pct">35%</span>
+      </div>
+      <div class="progress-bar" role="progressbar" aria-valuenow={35} aria-valuemin={0} aria-valuemax={100}>
+        <div class="progress-fill"></div>
+      </div>
+
+      <ul class="checklist" aria-label="Build checklist">
+        {done.map((item) => (
+          <li class="done">
+            <span class="check-icon done-icon" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            {item}
+          </li>
+        ))}
+        {todo.map((item) => (
+          <li>
+            <span class="check-icon todo-icon" aria-hidden="true"></span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .coming-soon-wrap {
+    position: relative;
+    z-index: 1;
+    background: var(--navy);
+    color: #fff;
+    padding: 96px 24px;
+    overflow: hidden;
+  }
+  /* Huge watermark text */
+  .coming-soon-wrap::before {
+    content: 'SOON';
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 20vw;
+    color: rgba(255, 255, 255, 0.03);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -4px;
+  }
+
+  .coming-soon-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .cs-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .cs-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .cs-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+  .cs-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  /* Progress card */
+  .progress-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    min-width: 280px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .progress-label span:first-child {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+  }
+  .progress-pct {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+
+  .progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 100px;
+    width: 0%;
+    animation: fill-bar 2s 0.5s ease forwards;
+  }
+  @keyframes fill-bar {
+    to { width: 35%; }
+  }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li.done { color: rgba(255, 255, 255, 0.9); }
+
+  .check-icon {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .done-icon  { background: var(--accent); color: var(--navy); }
+  .todo-icon  { border: 2px solid rgba(255, 255, 255, 0.2); }
+
+  @media (max-width: 768px) {
+    .coming-soon-inner {
+      grid-template-columns: 1fr;
+    }
+    .progress-card { min-width: unset; width: 100%; }
+  }
+</style>

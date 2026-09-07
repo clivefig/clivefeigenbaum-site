@@ -1,0 +1,79 @@
+---
+// No props needed for the placeholder nav
+---
+
+<nav id="top-nav">
+  <a href="/" class="nav-logo">Clive<span>.</span></a>
+  <div class="nav-pill" aria-label="Site status">
+    <div class="dot" aria-hidden="true"></div>
+    Coming Soon
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(249, 247, 244, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+  }
+</style>
+
+<script>
+  // Adds a subtle border as the user scrolls down
+  const nav = document.getElementById('top-nav')
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor =
+        window.scrollY > 20 ? 'var(--border)' : 'transparent'
+    }, { passive: true })
+  }
+</script>

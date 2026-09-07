@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Whisky gold "C" monogram favicon -->
+  <rect width="32" height="32" rx="8" fill="#1E3A5F"/>
+  <text
+    x="16" y="23"
+    font-family="Georgia, serif"
+    font-size="22"
+    font-weight="700"
+    text-anchor="middle"
+    fill="#D4961F"
+  >C</text>
+</svg>
