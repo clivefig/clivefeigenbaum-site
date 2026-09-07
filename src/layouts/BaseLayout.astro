@@ -213,6 +213,12 @@ const {
 </style>
 
 <script>
+  // Disable browser scroll restoration so refresh always starts at the top
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual'
+  }
+  window.scrollTo(0, 0)
+
   // Scroll reveal — runs once after DOM is ready
   const reveals = document.querySelectorAll('.reveal')
   const observer = new IntersectionObserver(
