@@ -180,6 +180,14 @@ Local Dev  →  GitHub Repo (main branch)  →  Netlify (auto-deploy on push)
 - Scroll reveal animations
 - Mobile responsive
 
+### v1.2 — Sep 7, 2026
+- Git repo initialised (`main` branch)
+- GitHub repo created: https://github.com/clivefig/clivefeigenbaum-site
+- Initial commit pushed (22 files, full Astro scaffold)
+- Old placeholder HTML archived to `_archive/placeholder-v1.html`
+- Root `assets/` folder removed (profile photo lives in `public/assets/`)
+- **Next:** Connect repo to Netlify for auto-deploy
+
 ### v1.1 — Sep 7, 2026
 - Added real email: `clive@clivefeigenbaum.com`
 - Added real LinkedIn URL
