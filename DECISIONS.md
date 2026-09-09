@@ -199,4 +199,36 @@ Local Dev  →  GitHub Repo (main branch)  →  Netlify (auto-deploy on push)
 
 ---
 
-*Last updated: Sep 7, 2026 — v1.1*
+### v1.6 — Sep 9, 2026
+- `/career` anti-index / anti-scrape stack:
+  - `robots.txt` `Disallow: /career` for `*` plus Googlebot, Bingbot, GPTBot, ClaudeBot, CCBot, and other scrapers
+  - `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex, nocache, noai, noimageai`
+  - `Cache-Control: no-store` on `/career`, `/career/`, `/career/*`
+  - Fallback `src/pages/career.astro` with matching meta robots (Netlify still 302s in production)
+- Still unlinked from nav/footer/home. Still not access control — password the CV subdomain for real privacy
+- QA: `npm test`
+
+### v1.5 — Sep 9, 2026
+- Unlisted shortcut: `clivefeigenbaum.com/career` → `https://cv.clivefeigenbaum.com/` (302)
+- Not in nav, footer, homepage, or sitemap. Not listed in `robots.txt` (listing it would advertise the path)
+- `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex` on `/career`
+- This is obscurity, not access control. Anyone with the URL can open it and share it. To keep the CV private, password-protect `cv.clivefeigenbaum.com` in Netlify and add `noindex` there too
+- QA: `npm test` (`scripts/qa-unlisted-routes.test.mjs`)
+
+### v1.4 — Sep 9, 2026
+- Front copy **does not** use a job title. Locked line: name + “Let’s talk.” — so the card works in any room (tech, photography, social) and does not corner Clive into SaaS onboarding
+- Back word labels (PHONE / EMAIL / LINKEDIN) replaced with line icons + values
+- LinkedIn printed as `clive-feigenbaum-israel` (the icon carries the network)
+- Regenerated `print/business-card/output/` 10-up PDFs
+
+### v1.3 — Sep 9, 2026
+- Business card Option 1 (identity) locked: navy `#1E3A5F`, red SCAN ME `#E4453A`, Poppins + Inter
+- Card size 85 × 55 mm; A4 10-up (2 × 5) with 18.5 mm side margins, 3 mm column gutter, 2 mm row gutter
+- Back imposed with columns swapped for G540 long-edge flip
+- Print files: `print/business-card/output/option1-front-a4.pdf` and `option1-back-a4.pdf`
+- Contact on card: phone `+972 52 408 3159`, email `clive.fig@gmail.com`, LinkedIn `in/clive-feigenbaum-israel`
+- QA: `python -m unittest test_layout.py` in `print/business-card/`
+
+---
+
+*Last updated: Sep 9, 2026 — v1.6*

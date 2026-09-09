@@ -8,6 +8,21 @@
 [build.environment]
   NODE_VERSION    = "22"
 
+# Unlisted CV shortcut. Not linked from the site. 302 (not 301) so search
+# engines do not treat /career as the permanent URL for the CV.
+# force=true so a future /career page cannot accidentally become public HTML.
+[[redirects]]
+  from   = "/career"
+  to     = "https://cv.clivefeigenbaum.com/"
+  status = 302
+  force  = true
+
+[[redirects]]
+  from   = "/career/*"
+  to     = "https://cv.clivefeigenbaum.com/"
+  status = 302
+  force  = true
+
 # Redirect www → apex domain
 [[redirects]]
   from   = "https://www.clivefeigenbaum.com/*"
@@ -22,3 +37,26 @@
     X-Frame-Options        = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy        = "strict-origin-when-cross-origin"
+
+# Ask crawlers and scrapers not to index or store /career if they fetch it.
+# Pair with robots.txt Disallow. Does not protect cv.clivefeigenbaum.com itself.
+[[headers]]
+  for = "/career"
+  [headers.values]
+    X-Robots-Tag    = "noindex, nofollow, noarchive, nosnippet, noimageindex, nocache, noai, noimageai"
+    Referrer-Policy = "no-referrer"
+    Cache-Control   = "no-store, no-cache, must-revalidate, private"
+
+[[headers]]
+  for = "/career/"
+  [headers.values]
+    X-Robots-Tag    = "noindex, nofollow, noarchive, nosnippet, noimageindex, nocache, noai, noimageai"
+    Referrer-Policy = "no-referrer"
+    Cache-Control   = "no-store, no-cache, must-revalidate, private"
+
+[[headers]]
+  for = "/career/*"
+  [headers.values]
+    X-Robots-Tag    = "noindex, nofollow, noarchive, nosnippet, noimageindex, nocache, noai, noimageai"
+    Referrer-Policy = "no-referrer"
+    Cache-Control   = "no-store, no-cache, must-revalidate, private"

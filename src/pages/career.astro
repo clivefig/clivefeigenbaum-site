@@ -1,0 +1,33 @@
+---
+/**
+ * Unlisted trampoline. Production Netlify force-redirects this path (302),
+ * so this HTML is a fallback for local preview and non-Netlify hosts.
+ * Noindex in the document so crawlers that render HTML still get the signal.
+ */
+const robots = 'noindex, nofollow, noarchive, nosnippet, noimageindex, nocache, noai, noimageai'
+const dest = 'https://cv.clivefeigenbaum.com/'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content={robots} />
+    <meta name="googlebot" content={robots} />
+    <meta name="bingbot" content={robots} />
+    <meta name="googlebot-news" content="noindex, nofollow" />
+    <meta name="AdsBot-Google" content="noindex, nofollow" />
+    <meta name="GPTBot" content="noindex, nofollow" />
+    <meta name="CCBot" content="noindex, nofollow" />
+    <meta name="ClaudeBot" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta http-equiv="refresh" content={`0;url=${dest}`} />
+    <link rel="canonical" href={dest} />
+    <title></title>
+    <script is:inline define:vars={{ dest }}>
+      window.location.replace(dest)
+    </script>
+  </head>
+  <body>
+    <p><a href={dest} rel="nofollow">Continue</a></p>
+  </body>
+</html>

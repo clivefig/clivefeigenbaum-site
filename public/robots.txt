@@ -1,0 +1,72 @@
+User-agent: *
+Allow: /
+Disallow: /career
+Disallow: /career/
+
+User-agent: GPTBot
+Disallow: /career
+Disallow: /career/
+
+User-agent: ChatGPT-User
+Disallow: /career
+Disallow: /career/
+
+User-agent: CCBot
+Disallow: /career
+Disallow: /career/
+
+User-agent: anthropic-ai
+Disallow: /career
+Disallow: /career/
+
+User-agent: ClaudeBot
+Disallow: /career
+Disallow: /career/
+
+User-agent: Claude-Web
+Disallow: /career
+Disallow: /career/
+
+User-agent: Google-Extended
+Disallow: /career
+Disallow: /career/
+
+User-agent: Googlebot
+Disallow: /career
+Disallow: /career/
+
+User-agent: Googlebot-Image
+Disallow: /career
+Disallow: /career/
+
+User-agent: Bingbot
+Disallow: /career
+Disallow: /career/
+
+User-agent: Bytespider
+Disallow: /career
+Disallow: /career/
+
+User-agent: PerplexityBot
+Disallow: /career
+Disallow: /career/
+
+User-agent: Applebot-Extended
+Disallow: /career
+Disallow: /career/
+
+User-agent: cohere-ai
+Disallow: /career
+Disallow: /career/
+
+User-agent: Meta-ExternalAgent
+Disallow: /career
+Disallow: /career/
+
+User-agent: Amazonbot
+Disallow: /career
+Disallow: /career/
+
+User-agent: Diffbot
+Disallow: /career
+Disallow: /career/

@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "node --test scripts/qa-unlisted-routes.test.mjs"
   },
   "dependencies": {
     "astro": "^4.16.0"
